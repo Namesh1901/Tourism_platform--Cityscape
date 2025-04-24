@@ -1,0 +1,108 @@
+{% extends 'tourism/base.html' %}
+
+{% block title %}Explore {{ city.name }} - Cityscape{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-6 py-12">
+  <h1 class="text-4xl font-bold mb-8 text-blue-700">Explore {{ city.name }}</h1>
+
+  <!-- Filters Form -->
+  <form method="get" class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Places Filter -->
+    <div>
+      <h3 class="text-xl font-semibold mb-2">Filter Places</h3>
+      <input type="text" name="place_name" placeholder="Place name" value="{{ request.GET.place_name }}" class="w-full border rounded px-3 py-2 mb-2" />
+    </div>
+
+    <!-- Hotels Filter -->
+    <div>
+      <h3 class="text-xl font-semibold mb-2">Filter Hotels</h3>
+      <input type="text" name="hotel_name" placeholder="Hotel name" value="{{ request.GET.hotel_name }}" class="w-full border rounded px-3 py-2 mb-2" />
+      <div class="flex space-x-2">
+        <input type="number" name="min_price" placeholder="Min price" value="{{ request.GET.min_price }}" class="w-1/2 border rounded px-3 py-2" />
+        <input type="number" name="max_price" placeholder="Max price" value="{{ request.GET.max_price }}" class="w-1/2 border rounded px-3 py-2" />
+      </div>
+    </div>
+
+    <!-- Venues Filter -->
+    <div>
+      <h3 class="text-xl font-semibold mb-2">Filter Venues</h3>
+      <input type="text" name="venue_name" placeholder="Venue name" value="{{ request.GET.venue_name }}" class="w-full border rounded px-3 py-2 mb-2" />
+      <div class="flex space-x-2">
+        <input type="number" name="min_price_venue" placeholder="Min price" value="{{ request.GET.min_price_venue }}" class="w-1/2 border rounded px-3 py-2" />
+        <input type="number" name="max_price_venue" placeholder="Max price" value="{{ request.GET.max_price_venue }}" class="w-1/2 border rounded px-3 py-2" />
+      </div>
+    </div>
+
+    <div class="md:col-span-3">
+      <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Apply Filters</button>
+    </div>
+  </form>
+
+  <!-- Places Section -->
+  <h2 class="text-3xl font-semibold mb-6">Places to Visit</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-12">
+    {% for place in places %}
+    <a href="{% url 'place_detail' place.id %}" class="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+      {% if place.image_url %}
+      <img src="{{ place.image_url }}" alt="{{ place.name }}" class="w-full h-48 object-cover" />
+      {% else %}
+      <img src="https://source.unsplash.com/featured/?tourism" alt="{{ place.name }}" class="w-full h-48 object-cover" />
+      {% endif %}
+      <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition flex flex-col justify-center items-center text-white p-4 text-center">
+        <h3 class="text-xl font-semibold mb-2">{{ place.name }}</h3>
+        <p class="text-sm">{{ place.description|truncatewords:30 }}</p>
+      </div>
+    </a>
+    {% empty %}
+    <p>No places available in this city.</p>
+    {% endfor %}
+  </div>
+
+  <!-- Hotels Section -->
+  <h2 class="text-3xl font-semibold mb-6">Hotels</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-12">
+    {% for hotel in hotels %}
+    <a href="{% url 'hotel_detail' hotel.id %}" class="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+      {% if hotel.image_url %}
+      <img src="{{ hotel.image_url }}" alt="{{ hotel.name }}" class="w-full h-48 object-cover" />
+      {% else %}
+      <img src="https://source.unsplash.com/featured/?hotel" alt="{{ hotel.name }}" class="w-full h-48 object-cover" />
+      {% endif %}
+      <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition flex flex-col justify-center items-center text-white p-4 text-center">
+        <h3 class="text-xl font-semibold mb-2">{{ hotel.name }}</h3>
+        <p>Rating: {{ hotel.rating }} / 5</p>
+        <p>Price per night: ₹{{ hotel.price_per_night }}</p>
+        <p>{{ hotel.address }}</p>
+      </div>
+    </a>
+    {% empty %}
+    <p>No hotels available in this city.</p>
+    {% endfor %}
+  </div>
+
+  <!-- Venues Section -->
+  <h2 class="text-3xl font-semibold mb-6">Venues</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    {% for venue in venues %}
+    <a  href="{% url 'venue_detail' venue.id %}" class="group relative block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+      {% if venue.image_url %}
+      <img src="{{ venue.image_url }}" alt="{{ venue.name }}" class="w-full h-48 object-cover" />
+      {% else %}
+      <img src="https://source.unsplash.com/featured/?venue" alt="{{ venue.name }}" class="w-full h-48 object-cover" />
+      {% endif %}
+      <div class="absolute inset-0 bg-black bg-opacity-60 opacity-0 group-hover:opacity-100 transition flex flex-col justify-center items-center text-white p-4 text-center">
+        <h3 class="text-xl font-semibold mb-2">{{ venue.name }}</h3>
+        <p>Capacity: {{ venue.capacity }}</p>
+        <p>Price per day: ₹{{ venue.price_per_day }}</p>
+        <p>{{ venue.address }}</p>
+      </div>
+    </a>
+    {% empty %}
+    <p>No venues available in this city.</p>
+    {% endfor %}
+  </div>
+
+  <a href="{% url 'dashboard' %}" class="inline-block mt-12 text-blue-600 hover:underline">Back to Dashboard</a>
+</section>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'tourism/base.html' %}
+
+{% block title %}Cityscape Tourism Hub{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+  <div class="container mx-auto px-6 py-20 flex flex-col md:flex-row items-center">
+    <div class="md:w-1/2">
+      <h1 class="text-5xl font-extrabold mb-6 leading-tight">Discover India's Most Beautiful Destinations</h1>
+      <p class="mb-8 text-lg max-w-lg">Explore top cities, book venues and hotels, and plan your perfect trip with Cityscape Tourism Hub.</p>
+      <a href="{% url 'register' %}" class="inline-block bg-white text-blue-700 font-semibold px-8 py-3 rounded-lg shadow hover:bg-gray-100 transition">Get Started</a>
+    </div>
+    <div class="md:w-1/2 mt-10 md:mt-0">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="India Tourism" class="rounded-lg shadow-lg" />
+    </div>
+  </div>
+</section>
+
+<!-- Featured Destinations -->
+<section class="container mx-auto px-6 py-16">
+  <h2 class="text-4xl font-bold text-center mb-12">Featured Destinations</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition">
+      <img src="/media/city_images/Delhi.jpg" alt="Delhi" class="w-full h-48 object-cover" />
+      <div class="p-4">
+        <h3 class="text-xl font-semibold mb-2">Delhi</h3>
+        <p class="text-gray-600">Explore the historic and vibrant capital city.</p>
+      </div>
+    </div>
+    <div class="rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition">
+      <img src="/media/city_images/Mumbai.jpg" alt="Mumbai" class="w-full h-48 object-cover" />
+      <div class="p-4">
+        <h3 class="text-xl font-semibold mb-2">Mumbai</h3>
+        <p class="text-gray-600">Experience the bustling city of dreams.</p>
+      </div>
+    </div>
+    <div class="rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition">
+      <img src="/media/city_images/Bangalore.jpg" alt="Bangalore" class="w-full h-48 object-cover" />
+      <div class="p-4">
+        <h3 class="text-xl font-semibold mb-2">Bangalore</h3>
+        <p class="text-gray-600">Discover the Silicon Valley of India.</p>
+      </div>
+    </div>
+    <div class="rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition">
+      <img src="/media/city_images/Chennai.jpg" alt="Chennai" class="w-full h-48 object-cover" />
+      <div class="p-4">
+        <h3 class="text-xl font-semibold mb-2">Chennai</h3>
+        <p class="text-gray-600">Enjoy the coastal charm and culture.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="bg-gray-50 py-16">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-12">Our Services</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div class="text-center">
+        <i class="fas fa-map-marked-alt text-blue-600 text-5xl mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">Tourist Destinations</h3>
+        <p class="text-gray-600 max-w-md mx-auto">Explore a wide range of tourist destinations across India.</p>
+      </div>
+      <div class="text-center">
+        <i class="fas fa-hotel text-blue-600 text-5xl mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">Hotel Bookings</h3>
+        <p class="text-gray-600 max-w-md mx-auto">Book comfortable and affordable hotels easily.</p>
+      </div>
+      <div class="text-center">
+        <i class="fas fa-calendar-check text-blue-600 text-5xl mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">Event Venues</h3>
+        <p class="text-gray-600 max-w-md mx-auto">Find and book venues for your events and gatherings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Call to Action -->
+<section class="bg-blue-600 text-white py-16 text-center">
+  <h2 class="text-4xl font-bold mb-6">Ready to Explore?</h2>
+  <p class="mb-8 max-w-xl mx-auto">Join thousands of happy travelers and start your journey today.</p>
+  <a href="{% url 'register' %}" class="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg shadow hover:bg-gray-100 transition">Get Started</a>
+</section>
+{% endblock %}

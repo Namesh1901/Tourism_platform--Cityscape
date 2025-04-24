@@ -1,0 +1,23 @@
+{% extends 'tourism/base.html' %}
+
+{% block title %}{{ venue.name }} - Details{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-6 py-12">
+  <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+    {% if venue.image_url %}
+    <img src="{{ venue.image_url }}" alt="{{ venue.name }}" class="w-full h-64 object-cover" />
+    {% else %}
+    <img src="https://source.unsplash.com/featured/?venue" alt="{{ venue.name }}" class="w-full h-64 object-cover" />
+    {% endif %}
+    <div class="p-6">
+      <h1 class="text-3xl font-bold mb-4">{{ venue.name }}</h1>
+      <p class="text-gray-700 mb-2">Capacity: {{ venue.capacity }}</p>
+      <p class="text-gray-700 mb-6">Price per day: ₹{{ venue.price_per_day }}</p>
+      <p class="text-gray-700 mb-6">{{ venue.address }}</p>
+      <a href="{% url 'venue_booking' venue.id %}" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">Book This Venue</a>
+      <a href="{% url 'city_places' venue.city.id %}" class="ml-4 text-blue-600 hover:underline">Back to {{ venue.city.name }}</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

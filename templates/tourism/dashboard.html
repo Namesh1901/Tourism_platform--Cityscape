@@ -1,0 +1,67 @@
+{% extends 'tourism/base.html' %}
+
+{% block title %}Dashboard - Cityscape{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-6 py-12">
+  <h1 class="text-4xl font-bold mb-8 text-center text-blue-700">Welcome back, {{ user.username }}!</h1>
+
+  <h2 class="text-3xl font-semibold mb-6">Explore Cities</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+    {% for city in cities %}
+    <a href="{% url 'city_places' city.id %}" class="block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1">
+      <img src="/media/city_images/{{ city.name }}.jpg" alt="{{ city.name }}" class="w-full h-48 object-cover" />
+      <div class="p-4 bg-white">
+        <h3 class="text-xl font-semibold">{{ city.name }}</h3>
+      </div>
+    </a>
+    {% empty %}
+    <p>No cities available.</p>
+    {% endfor %}
+  </div>
+
+  <h2 class="text-3xl font-semibold mb-6">My Bookings</h2>
+  {% if bookings %}
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white rounded shadow">
+      <thead>
+        <tr>
+          <th class="py-2 px-4 border-b">Booking Type</th>
+          <th class="py-2 px-4 border-b">Place Name</th>
+          <th class="py-2 px-4 border-b">Start Date</th>
+          <th class="py-2 px-4 border-b">End Date</th>
+          <th class="py-2 px-4 border-b">Number of Persons</th>
+          <th class="py-2 px-4 border-b">Time of Visit</th>
+          <th class="py-2 px-4 border-b">Extra Amenities</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+        <tr class="hover:bg-gray-100">
+          <td class="py-2 px-4 border-b">
+            {% if booking.venue %}
+              Venue
+            {% elif booking.hotel %}
+              Hotel
+            {% elif booking.place %}
+              Place
+            {% else %}
+              N/A
+            {% endif %}
+          </td>
+          <td class="py-2 px-4 border-b">{% if booking.place %}{{ booking.place.name }}{% else %}N/A{% endif %}</td>
+          <td class="py-2 px-4 border-b">{{ booking.start_date|date:"d/m/Y" }}</td>
+          <td class="py-2 px-4 border-b">{{ booking.end_date|date:"d/m/Y" }}</td>
+          <td class="py-2 px-4 border-b">{{ booking.number_of_persons }}</td>
+          <td class="py-2 px-4 border-b">{{ booking.time_of_visit }}</td>
+          <td class="py-2 px-4 border-b">{{ booking.extra_amenities }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p>You have no bookings yet.</p>
+  {% endif %}
+</section>
+{% endblock %}
