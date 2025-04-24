@@ -1,0 +1,2 @@
+[console_scripts]
+runserver = FlaskWebProject1.app:run

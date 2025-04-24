@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: runserver
+Version: 1.0.4
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Flask
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Requires-Dist: Flask
+
