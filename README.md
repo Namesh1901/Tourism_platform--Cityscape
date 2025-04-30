@@ -117,11 +117,14 @@ The application follows a traditional web architecture with a Django backend ser
 
 ## Deployment
 
-- The project can be containerized using Docker.
-- PostgreSQL is used as the database backend.
+- The project is containerized using Docker.
+- PostgreSQL is used as the database backend bu using docker image.
+- Django application is also containerized and run on isolated network to connect postgres to application.
 - Environment variables are used to configure database connection.
-- Static and media files are served appropriately.
+- Static and media files are served appropriately stored in server.
 - The application runs on port 8000 by default.
+- For testing can copy paste "http://34.173.159.205:8000/" to see website hosted on Google cloud platform
+  
 
 ---
 
